@@ -19,14 +19,13 @@
 SetWorkingDir %A_ScriptDir%
 
 Name := "Backup Buddy"
-Version := "v0.0.1"
+Version := "v0.5"
 
 /**
  * Global Variables
  *
  * Edit only if you are sure enough.
  */
-
 
 ; ######################## Script Begins ########################
 
@@ -55,10 +54,44 @@ Consult readme for usage instructions.
 )
 SetTimer, RemoveTrayTip, 2500
 
+; ######################## Core Logic ########################
+
+; sources =
+; ( LTrim Join|
+; D:\I, Coder\@ GitHub\backup-buddy
+; )
+
+7ZipPath := "Data\7z.exe"
+
+Source := "D:\I, Coder\@ GitHub\backup-buddy"
+DestinationRoot := "D:"
+
+Password := "plok"
+
+DestDir := "Backup-Buddy"
+FileName = %A_DD%-%A_MMM%-%A_YYYY%-%A_Hour%-%A_Min%-%A_Sec%
+
+ExcludeFiles := "-xr!*.ahk"
+ExcludeFolders := "-xr!Help"
+
+Method := "-mx9"
+PSwitch := "-p" . Password . " -mhe"
+
+Yes := "-y"
+
+Params = %Destination%\%DestDir%\%FileName%.7z "%Source%" %Yes% %Method% %ExcludeFiles% %ExcludeFolders%
+
+FileDelete, %Destination%\%DestDir%\*.7z ; delete previous ones
+
+; Let's Do This
+Run, % 7ZipPath . " a " . Params, %A_ScriptDir%, Hide
+
+ExitApp
+
+; ######################## Misc. Stuff ########################
 
 /**
  * Miscellaneous Routines
- *
  */
 
 RemoveToolTip:

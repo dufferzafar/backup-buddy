@@ -1,6 +1,7 @@
-# Backup Buddy
+# Backup Buddy v0.5
 
-![Backup Buddy](/Data/White.png)
+<!-- ![Backup Buddy](/Data/White.png) -->
+<img src="Data/White.png" alt="Backup Buddy" style="width: 128px; height: 128px;"/>
 
 A simple script to automatically backup folders.
 
@@ -37,17 +38,35 @@ Currently it's just this readme. So...
   * Timer - 15mins or something.
   * Filenames should have a timestamp.
   * Open Backup Directory. Tray Menu.
+  * Passwords on backups.
+
+* Add as an extension to WinButler
 
 * Later - v2.
-  * Maintain five such snapshots. Setting.
-  * Backup only if changes have ocurred. WatchDirectory()
+  * Maintain five such snapshots.
+  * GUI for settings.
+  * Log Files.
+  * Check integrity of all backups.
+
+* Notifications
+  * During the backup process.
+  * When backup done.
+  * Errors Occurred.
 
 * Exclusion Lists
   * Default Exclusions - System files.
   * User's List - Files, Folder Patterns
   * 7Zip -x switch
 
+* Backups Browser - v3.
+  * Restore a backup.
+  * Merge/Update.
+
+* WatchDirectory()
+  * Backup only if changes have ocurred.
+  * Backup only those files which have changed.
+  * Auto Backup when changes occur.
+
 ## <a name="changelog"></a>Changelog
 
 * Basic Readme Written. See [this](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).
-
