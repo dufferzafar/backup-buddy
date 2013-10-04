@@ -1,7 +1,6 @@
 # Backup Buddy
-============
 
-![Backup Buddy](/data/white.png)
+![Backup Buddy](/Data/White.png)
 
 A simple script to automatically backup folders.
 
