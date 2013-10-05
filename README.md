@@ -71,3 +71,6 @@ Currently it's just this readme. So...
 ## <a name="changelog"></a>Changelog
 
 * Basic Readme Written. See [this](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dufferzafar/backup-buddy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
