@@ -11,6 +11,7 @@
  *
  * Do not touch if you are unsure of anything.
  */
+
 #NoEnv
 #SingleInstance Force
 #Persistent
@@ -19,13 +20,33 @@
 SetWorkingDir %A_ScriptDir%
 
 Name := "Backup Buddy"
-Version := "v0.5"
+Version := "v0.7"
 
 /**
  * Global Variables
  *
  * Edit only if you are sure enough.
  */
+
+; The path to 7Zip executable. Make sure 7z.dll is present too.
+7ZipPath := "Data\7z.exe"
+
+; Folders to backup
+; Source := "D:\I, Coder\@ GitHub\backup-buddy"
+Sources =
+( LTrim Join|
+D:\I, Coder\@ GitHub\backup-buddy
+D:\I, Coder\@ GitHub\win-butler
+)
+
+; The directory where the backups will be saved
+Destination := "F:\Backups"
+
+; A password if you want the backups to be protected.
+Password := ""
+
+; Time in minutes when the backups will be performed
+Period := 1
 
 ; ######################## Script Begins ########################
 
@@ -54,39 +75,56 @@ Consult readme for usage instructions.
 )
 SetTimer, RemoveTrayTip, 2500
 
-; ######################## Core Logic ########################
+; ######################## Preparatory ########################
 
-; sources =
-; ( LTrim Join|
-; D:\I, Coder\@ GitHub\backup-buddy
-; )
+; Create the root if it doesn't exist
+FileCreateDir, %Destination%
 
-7ZipPath := "Data\7z.exe"
-
-Source := "D:\I, Coder\@ GitHub\backup-buddy"
-DestinationRoot := "D:"
-
-Password := "plok"
-
-DestDir := "Backup-Buddy"
-FileName = %A_DD%-%A_MMM%-%A_YYYY%-%A_Hour%-%A_Min%-%A_Sec%
-
-ExcludeFiles := "-xr!*.ahk"
-ExcludeFolders := "-xr!Help"
-
+; Compression method to use. See 7Zip help.
 Method := "-mx9"
-PSwitch := "-p" . Password . " -mhe"
 
+; Assume yes on all stuff
 Yes := "-y"
 
-Params = %Destination%\%DestDir%\%FileName%.7z "%Source%" %Yes% %Method% %ExcludeFiles% %ExcludeFolders%
+; If Password is provided - use it.
+If (Password != "")
+	PSwitch := "-p" . Password . " -mhe"
+Else
+	PSwitch := ""
 
-FileDelete, %Destination%\%DestDir%\*.7z ; delete previous ones
+; ExcludeFiles := "-xr!*.ahk"
+; ExcludeFolders := "-xr!Help"
+; Params = %Destination%\%DestDir%\%FileName%.7z "%Source%" %Yes% %Method% %ExcludeFiles% %ExcludeFolders%
+; FileDelete, %Destination%\%DestDir%\*.7z ; delete previous ones
 
-; Let's Do This
-Run, % 7ZipPath . " a " . Params, %A_ScriptDir%, Hide
+SetTimer, Backup, % Period * 60 * 1000
 
-ExitApp
+Return	 ; End of Auto Execute Section
+
+; ######################## Core Logic #########################
+
+/**
+ * Loop through sources and backup them
+ *
+ * Todo: What if the source doesn't exist?
+ */
+
+Backup:
+	Loop, Parse, sources, |
+	{
+		SplitPath, A_LoopField, FolderName
+		DestDir := Destination "\" FolderName
+
+		If FileExist(DestDir)
+		{
+			FileName = %A_DD%-%A_MMM%-%A_YYYY%-%A_Hour%-%A_Min%-%A_Sec%
+
+			Params = %DestDir%\%FileName%.7z "%A_LoopField%" %Yes% %Method% %PSwitch%
+
+			Run, % 7ZipPath . " a " . Params, %A_ScriptDir%, Hide
+		}
+	}
+Return
 
 ; ######################## Misc. Stuff ########################
 
