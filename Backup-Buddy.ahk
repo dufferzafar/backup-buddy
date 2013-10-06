@@ -98,7 +98,7 @@ SetTimer, RemoveTrayTip, 2500
 FileCreateDir, %Destination%
 
 ; Compression method to use. See 7Zip help.
-Method := "-mx9"
+Method := "-mx0"
 
 ; Assume yes on all stuff
 Yes := "-y"

@@ -76,7 +76,7 @@ Have Fun!
 
 ## <a name="changelog"></a>Changelog
 
-v0.9:
+* v0.9:
 
   * Multiple source directories.
   * 7Zip Compression.
