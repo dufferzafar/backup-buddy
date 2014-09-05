@@ -1,7 +1,6 @@
 # Backup Buddy v0.9
 
-<!-- ![Backup Buddy](/Data/White.png) -->
-<img src="Data/White64.png" alt="Backup Buddy" style="width: 64px; height: 64px;"/>
+*Status: Not maintained anymore. Any improvements whatsoever now occur in: [dufferzafar/win-butler](https://github.com/dufferzafar/win-butler/blob/master/Data/buddy/backup.ahk)*
 
 A script to automatically backup your folders.
 
@@ -48,8 +47,6 @@ Have Fun!
 * Core Features - v1.
   * Add a real basic GUI for settings.
 
-* Add as an extension to WinButler
-
 * Later - v2
   * Log Files.
   * Delete backups older than X (time)
@@ -75,6 +72,8 @@ Have Fun!
   * Auto Backup when changes occur.
 
 ## <a name="changelog"></a>Changelog
+
+* This script is now a part of Windows Butler.
 
 * v0.9:
 
